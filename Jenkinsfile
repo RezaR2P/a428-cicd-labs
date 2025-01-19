@@ -1,6 +1,13 @@
 node {
-    // Menjalankan agen menggunakan Docker
     docker.image('node:16-buster-slim').inside('-p 3000:3000') {
+        stage('Clean Workspace') {
+            cleanWs() // Membersihkan workspace
+        }
+
+        stage('Clone Repository') {
+            checkout scm
+        }
+
         stage('Build') {
             sh 'npm install'
         }
